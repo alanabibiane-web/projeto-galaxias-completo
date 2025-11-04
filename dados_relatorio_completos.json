@@ -1,0 +1,30 @@
+{
+  "NGC5846": {
+    "nome": "NGC5846",
+    "num_isofotas": 40,
+    "raio_maximo": 83.5,
+    "mu0": 14.073,
+    "b": 2.146,
+    "alpha": 0.065,
+    "mu_e": 22.4,
+    "Re_arcsec": 89.67,
+    "Re_kpc": 10.71,
+    "eps_media": 0.078,
+    "pa_medio": 86.0,
+    "rms": 0.0782
+  },
+  "NGC4473": {
+    "nome": "NGC4473",
+    "num_isofotas": 26,
+    "raio_maximo": 168.2,
+    "mu0": 12.142,
+    "b": 2.692,
+    "alpha": 0.026,
+    "mu_e": 20.47,
+    "Re_arcsec": 36.23,
+    "Re_kpc": 5.67,
+    "eps_media": 0.418,
+    "pa_medio": 93.0,
+    "rms": 0.0795
+  }
+}

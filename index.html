@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Análise Fotométrica de Galáxias Elípticas</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: 'Georgia', serif;
+            line-height: 1.8;
+            color: #1a1a1a;
+            background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 60px 40px;
+            text-align: center;
+            position: relative;
+        }
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 15px;
+        }
+        .content { padding: 40px; }
+        .abstract {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 8px;
+            margin-bottom: 40px;
+        }
+        section { margin-bottom: 50px; }
+        h2 { 
+            color: #1e3c72;
+            font-size: 2em;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+        .galaxy-card {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 30px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+        }
+        .comparison-table th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+        .comparison-table td {
+            padding: 15px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .metric {
+            background: #667eea;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            display: inline-block;
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>ANÁLISE FOTOMÉTRICA DE GALÁXIAS ELÍPTICAS</h1>
+            <div class="subtitle">NGC 5846 e NGC 4473: Um Estudo Comparativo</div>
+            <div class="date">Relatório Interativo - Análise Astrofísica</div>
+        </div>
+        
+        <div class="content">
+            <div class="abstract">
+                <h2>RESUMO EXECUTIVO</h2>
+                <p>Análise fotométrica detalhada de duas galáxias elípticas representativas. NGC 5846 (E0-E1) é uma elíptica gigante com raio de 10.7 kpc, enquanto NGC 4473 (E5) é uma elíptica média com raio de 5.7 kpc e alongamento pronunciado. Ambas seguem rigorosamente a lei de de Vaucouleurs.</p>
+            </div>
+            
+            <section>
+                <h2>📊 RESULTADOS COMPARATIVOS</h2>
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Parâmetro</th>
+                            <th>NGC 5846 (E0-E1)</th>
+                            <th>NGC 4473 (E5)</th>
+                            <th>Significância</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Raio efetivo</strong></td>
+                            <td><span class="metric">10.7 kpc</span></td>
+                            <td><span class="metric">5.7 kpc</span></td>
+                            <td>NGC 5846 é 1.9× maior</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Brilho superficial</strong></td>
+                            <td><span class="metric">22.40 mag/arcsec²</span></td>
+                            <td><span class="metric">20.47 mag/arcsec²</span></td>
+                            <td>NGC 4473 é 1.93 mag mais brilhante</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Elipticidade</strong></td>
+                            <td><span class="metric">0.078</span></td>
+                            <td><span class="metric">0.418</span></td>
+                            <td>NGC 4473 é 5.4× mais alongada</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section>
+                <h2>📈 GRÁFICOS INTERATIVOS</h2>
+                <div style="background: #f8f9fa; padding: 30px; border-radius: 8px; margin: 20px 0;">
+                    <div style="text-align: center; font-size: 1.3em; margin-bottom: 20px;">
+                        Comparação de Parâmetros Estruturais
+                    </div>
+                    <canvas id="comparisonChart"></canvas>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <script>
+        // Gráfico de comparação
+        const ctx = document.getElementById('comparisonChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Raio (kpc)', 'Brilho μₑ', 'Elipticidade'],
+                datasets: [
+                    {
+                        label: 'NGC 5846 (E0-E1)',
+                        data: [10.7, 22.4, 0.078],
+                        backgroundColor: '#1e3c72'
+                    },
+                    {
+                        label: 'NGC 4473 (E5)',
+                        data: [5.7, 20.47, 0.418],
+                        backgroundColor: '#667eea'
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
